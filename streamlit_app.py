@@ -104,7 +104,7 @@ if "state" not in st.session_state:
 
 # Run Graph
 state = st.session_state.state
-next_node = compiled_graph.run(state)
+next_node = compiled_graph.invoke(state)
 
 # Display Final Report
 if state.final_report:
