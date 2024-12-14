@@ -8,13 +8,13 @@ from langchain_core.prompts import ChatPromptTemplate
 load_dotenv()
 
 # app config
-st.set_page_config(page_title="Streaming bot", page_icon="🤖")
-st.title("Streaming bot")
+st.set_page_config(page_title="Rorschach Test")
+st.title("Rorschach Test")
 
 
 def get_response(user_query, chat_history, llm=None):
     template = """
-    You are a helpful assistant. Answer the following questions considering the history of the conversation:
+    You are a Psychologist. You are conducting a Rorschach test.:
 
     Chat history: {chat_history}
 
