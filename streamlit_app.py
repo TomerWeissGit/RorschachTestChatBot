@@ -12,7 +12,7 @@ st.set_page_config(page_title="Streaming bot", page_icon="🤖")
 st.title("Streaming bot")
 
 
-def get_response(user_query, chat_history):
+def get_response(user_query, chat_history, openai_api_key):
     template = """
     You are a helpful assistant. Answer the following questions considering the history of the conversation:
 
@@ -22,13 +22,9 @@ def get_response(user_query, chat_history):
     """
 
     prompt = ChatPromptTemplate.from_template(template)
-    openai_api_key = st.text_input("OpenAI API Key", type="password")
-    if not openai_api_key:
-        st.info("Please add your OpenAI API key to continue.", icon="🗝️")
-    else:
 
-        # Create an OpenAI client.
-        llm = ChatOpenAI(api_key=openai_api_key, model="gpt-4", temperature=0)
+
+    llm = ChatOpenAI(model="gpt-4", temperature=0, api_key=openai_api_key)
 
     chain = prompt | llm | StrOutputParser()
 
@@ -43,6 +39,9 @@ if "chat_history" not in st.session_state:
     st.session_state.chat_history = [
         AIMessage(content="Hello, I am a bot. How can I help you?"),
     ]
+openai_api_key = st.text_input("OpenAI API Key", type="password")
+if not openai_api_key:
+    st.info("Please add your OpenAI API key to continue.", icon="🗝️")
 
 # conversation
 for message in st.session_state.chat_history:
@@ -62,6 +61,6 @@ if user_query is not None and user_query != "":
         st.markdown(user_query)
 
     with st.chat_message("AI"):
-        response = st.write_stream(get_response(user_query, st.session_state.chat_history))
+        response = st.write_stream(get_response(user_query, st.session_state.chat_history, openai_api_key))
 
     st.session_state.chat_history.append(AIMessage(content=response))
