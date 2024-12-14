@@ -23,7 +23,7 @@ def get_response(user_query, chat_history):
 
     prompt = ChatPromptTemplate.from_template(template)
 
-    llm = ChatOpenAI()
+    llm = ChatOpenAI(model="gpt-4", temperature=0)
 
     chain = prompt | llm | StrOutputParser()
 
