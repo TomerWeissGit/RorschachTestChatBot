@@ -16,7 +16,7 @@ st.set_page_config(page_title="Rorschach Test", layout="wide")
 st.title("Rorschach Test")
 
 # Define Image List
-IMAGES = [f"https://example.com/inkblot{i}.jpg" for i in range(1, 11)]  # Replace with actual image URLs
+IMAGES = [f"https://www.rorschach.org/blots/rorschach-blot-{i}.jpg" for i in range(1, 11)]  # Replace with actual image URLs
 
 # Define State Model
 class RorschachTestState(BaseModel):
