@@ -33,15 +33,15 @@ def get_response(user_query, chat_history, openai_api_key):
         "user_question": user_query,
     })
 
+openai_api_key = st.text_input("OpenAI API Key", type="password")
+if not openai_api_key:
+    st.info("Please add your OpenAI API key to continue.", icon="🗝️")
 
 # session state
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = [
         AIMessage(content="Hello, I am a bot. How can I help you?"),
     ]
-openai_api_key = st.text_input("OpenAI API Key", type="password")
-if not openai_api_key:
-    st.info("Please add your OpenAI API key to continue.", icon="🗝️")
 
 # conversation
 for message in st.session_state.chat_history:
