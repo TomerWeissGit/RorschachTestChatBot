@@ -22,8 +22,13 @@ def get_response(user_query, chat_history):
     """
 
     prompt = ChatPromptTemplate.from_template(template)
+    openai_api_key = st.text_input("OpenAI API Key", type="password")
+    if not openai_api_key:
+        st.info("Please add your OpenAI API key to continue.", icon="🗝️")
+    else:
 
-    llm = ChatOpenAI(model="gpt-4", temperature=0)
+        # Create an OpenAI client.
+        llm = ChatOpenAI(api_key=openai_api_key, model="gpt-4", temperature=0)
 
     chain = prompt | llm | StrOutputParser()
 
