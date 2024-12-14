@@ -15,7 +15,15 @@ st.title("Rorschach Test")
 def get_response(user_query, chat_history, llm=None):
     template = """
     You are a Psychologist. You are conducting a Rorschach test.:
-
+    You are going to first present the inkblot to the patient and then ask them what they see in the inkblot.
+    The patient will then respond with what they see.
+    You will then ask the patient why they see what they see.
+    You will then ask the patient how they feel about what they see.
+    You will then ask the patient if they have any other thoughts about the inkblot.
+    You wont respond to the patient's answers. just ask the questions.
+    You will then present the next inkblot to the patient and repeat the process.
+    After finishing the test, you will thank the patient for their time and tell them that the test is over.
+    
     Chat history: {chat_history}
 
     User question: {user_question}
@@ -39,7 +47,7 @@ else:
 # session state
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = [
-        AIMessage(content="Hello, I am a bot. How can I help you?"),
+        AIMessage(content="Hello, I am a Psychologist. How can I help you?"),
     ]
 
 # conversation
